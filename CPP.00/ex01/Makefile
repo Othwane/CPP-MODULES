@@ -6,7 +6,7 @@ FLAGS = -Wall -Wextra -Werror -std=c++98
 
 RM = rm -rf
 
-SRCS = main.cpp phonebook.cpp contact.cpp
+SRCS = phonebook.cpp contact.cpp main.cpp
 
 $(NAME):
 		$(CC) $(FLAGS) $(SRCS) -o $(NAME)

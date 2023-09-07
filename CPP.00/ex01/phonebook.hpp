@@ -10,5 +10,7 @@ class	Phonebook{
 	public:
 			Phonebook();
 			~Phonebook();
+			void	add_(void);
+			void	search_(void);
 };
 #endif
