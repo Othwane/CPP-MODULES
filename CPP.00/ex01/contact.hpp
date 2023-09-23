@@ -13,6 +13,10 @@ class	Contact{
 	public:
 			Contact();
 			~Contact();
+			void		set_(int sign, std::string *info);
+			void	get_();
+			void	del_(int count);
+
 };
 
 
