@@ -44,7 +44,7 @@ void	print_messages(int msg){
 
 }
 
-int	Phonebook::add_(int x){
+void	Phonebook::add_(int x){
 	std::string info;
 
 	if (index < 8){
@@ -55,7 +55,7 @@ int	Phonebook::add_(int x){
 			if (info.empty()){
 				std::cout << "empty" << std::endl;
 				add_(i);
-				return (-1);
+				return ;
 			}
 			int x = add_info(&info, i);
 			if (x == 1){
@@ -63,20 +63,25 @@ int	Phonebook::add_(int x){
 				break;
 			}
 			info.clear();
+			if (i == 4){
+				index++;
+				booksize++;
+			}
 		}
-		index++;
-		if (booksize != 8)
-			booksize++;
+		std::cout << index << ".." << std::endl;
+		std::cout << booksize << ".." << std::endl;
+		std::cout << "----------------" << std::endl;
 	}else {
 		index = 0;
 		add_();
-		std::cout << index << "-" <<std::endl;
-		std::cout << booksize << "-" << std::endl;
+		std::cout << index << "**" << std::endl;
+		std::cout << booksize << "**" << std::endl;
+		std::cout << "----------------" << std::endl;
 	}
-	return 0;
+	return ;
 }
 
-int	Phonebook::add_(void){
+void	Phonebook::add_(void){
 	std::string info;
 
 	if (index < 8){
@@ -85,27 +90,33 @@ int	Phonebook::add_(void){
 			print_messages(i);
 			std::getline(std::cin, info);
 			if (info.empty()){
-				std::cout << "empty" << std::endl;
+				std::cout << "TYPE SOMETHING PLEASE !" << std::endl;
 				add_(i);
-				return 1;
+				return ;
 			}
 			int x = add_info(&info, i);
 			if (x == 1){
 				add_(i);
-				return 1;
+				return ;
 			}
 			info.clear();
 		}
 		index++;
 		if (booksize != 8)
 			booksize++;
+		std::cout << index << "=" << std::endl;
+		std::cout << booksize << "=" << std::endl;
+		std::cout << "----------------" << std::endl;
 	}
 	else{
-		index= 0;
+		index = 0;
 		add_();
+		std::cout << index << "**" << std::endl;
+		std::cout << booksize << "**" << std::endl;
+		std::cout << "----------------" << std::endl;
 	}
-	std::cout << index << "--" << booksize << std::endl;
-	return 0;
+	std::cout << index << "-|-" << booksize << std::endl;
+	return ;
 }
 
 int	Phonebook::add_info(std::string *info2add, int sign){

@@ -13,8 +13,8 @@ class	Phonebook{
 	public:
 			Phonebook();
 			~Phonebook();
-			int		add_(void);
-			int		add_(int x);
+			void		add_(void);
+			void		add_(int x);
 			void	search_(void);
 };
 #endif
