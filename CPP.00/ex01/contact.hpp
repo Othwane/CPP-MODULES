@@ -13,9 +13,10 @@ class	Contact{
 	public:
 			Contact();
 			~Contact();
+			std::string	get_(int sign);
 			void		set_(int sign, std::string *info);
-			void	get_();
-			void	del_(int count);
+			void		del_(int count);
+			int			how_many_spaces_nedded(int sign);
 
 };
 

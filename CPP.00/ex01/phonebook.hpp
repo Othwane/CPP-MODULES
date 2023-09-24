@@ -2,6 +2,7 @@
 #define PHONEBOOK_H
 
 #include "contact.hpp"
+#include <iomanip>
 
 class	Phonebook{
 	private:
@@ -15,6 +16,7 @@ class	Phonebook{
 			~Phonebook();
 			void		add_(void);
 			void		add_(int x);
-			void	search_(void);
+			int	search_(void);
+			int display_();
 };
 #endif
