@@ -21,15 +21,6 @@ Phonebook::~Phonebook(){
 	return;
 }
 
-// bool	isblank_(std::string *info){
-// 	for (std::string::iterator it = info->begin(); it < info->end(); it++)
-// 	{
-// 		if (*it != ' ')
-// 			return true;
-// 	}
-// 	return false;
-// }
-
 void	print_messages(int msg){
 	if (msg == 0)
 		std::cout << "FIRST NAME :" << std::endl;
@@ -44,71 +35,31 @@ void	print_messages(int msg){
 
 }
 
-int	Phonebook::display_(){
-	std::cout << "|==========|==========|==========|==========|" << std::endl;
-	std::cout << "|     index|FIRST_NAME| LAST_NAME|  NICKNAME|" << std::endl;
-	std::cout << "|__________|__________|__________|__________|" << std::endl;
-	int info = -1;
-	if (booksize == 0)
-		std::cout << "PHONEBOOK IS EMPTY... ADD A CONTACT FIRST !" << std::endl;
-	else
-	{
-		for (int i = 0; i < booksize; i++)
-		{
-			for (int ii = 0; ii < 3; ii++)
-			{
-				if (ii == 0){
-					std::cout << "|";
-					std::cout << std::setw(10);
-					std::cout << i;
-				}
-				std::cout << "|";
-				std::string contactinfo = contacts[i].get_(ii);
-				if (contactinfo.length() < 10){
-					std::cout << std::setw(10);
-					std::cout << contacts[i].get_(ii);
-				}
-				else if (contactinfo.length() > 9){
-					for (size_t i = 0; i < 9; i++){
-						std::cout << contactinfo[i];
-					}
-					std::cout << '.';
-				}
-				else
-					std::cout << contacts[i].get_(ii);
-			}
-			std::cout << "|" << std::endl;
-			std::cout << "|__________|__________|__________|__________|" << std::endl;
-		}
-		std::cout << "PUT CONTACT INDEX SEARCHING FOR FROM 0 TO " << booksize << std::endl;
-		std::cin >> info;
-		if (info <= booksize){
-			std::cout << "FIRST_NAME     :" << contacts[info].get_(0) << std::endl;
-			std::cout << "LAST_NAME      :" << contacts[info].get_(1) << std::endl;
-			std::cout << "NICK_NAME      :" << contacts[info].get_(2) << std::endl;
-			std::cout << "PHONE_NUMBER   :" << contacts[info].get_(3) << std::endl;
-			std::cout << "DARKEST_SECRET :" << contacts[info].get_(4) << std::endl;
-		}
-	}
-	return 0;
-}
-
-void	Phonebook::add_(int x){
+void	Phonebook::add_(int x, int repeat){
 	std::string info;
+
 
 	if (index < 8){
 		for (int i = x; i < 5; i++)
 		{
 			print_messages(i);
 			std::getline(std::cin, info);
+			if (std::cin.eof())
+				exit (EXIT_FAILURE);
 			if (info.empty()){
-				std::cout << "empty" << std::endl;
-				add_(i);
+				if(repeat < 3){
+					repeat += 1;
+					std::cout << "TYPE SOMETHING PLEASE !" << std::endl;
+					add_(i, repeat);
+				}
+				else{
+					std::cout << "" << std::endl;
+				}
 				return ;
 			}
 			int x = add_info(&info, i);
 			if (x == 1){
-				add_(i);
+				add_(i, repeat);
 				break;
 			}
 			info.clear();
@@ -118,35 +69,33 @@ void	Phonebook::add_(int x){
 					booksize++;
 			}
 		}
-		std::cout << index << ".." << std::endl;
-		std::cout << booksize << ".." << std::endl;
-		std::cout << "----------------" << std::endl;
 	}else {
 		index = 0;
 		add_();
-		std::cout << index << "**" << std::endl;
-		std::cout << booksize << "**" << std::endl;
-		std::cout << "----------------" << std::endl;
 	}
 	return ;
 }
 
 void	Phonebook::add_(void){
 	std::string info;
+	int repeat(0);
 
 	if (index < 8){
 		for (int i = 0; i < 5; i++)
 		{
 			print_messages(i);
 			std::getline(std::cin, info);
+			if (std::cin.eof())
+				exit(EXIT_FAILURE);
 			if (info.empty()){
+				repeat += 1;
 				std::cout << "TYPE SOMETHING PLEASE !" << std::endl;
-				add_(i);
+				add_(i, repeat);
 				return ;
 			}
 			int x = add_info(&info, i);
 			if (x == 1){
-				add_(i);
+				add_(i, repeat);
 				return ;
 			}
 			info.clear();
@@ -161,7 +110,6 @@ void	Phonebook::add_(void){
 		index = 0;
 		add_();
 	}
-	// std::cout << index << "-|-" << booksize << std::endl;
 	return ;
 }
 
@@ -189,19 +137,162 @@ int	Phonebook::add_info(std::string *info2add, int sign){
 	return 0;
 }
 
-// void	Phonebook::del_prev(int index, int count){
-// 	while (count--)
-// 	{
-// 		contacts[index].del_(count);
-// 	}
-
-// }
-
-
-
-
-int	Phonebook::search_(void){
-	display_();
-	return 0;
+int check_input(std::string *info){
+	int sum = 0;
+	int i = 0;
+	if (info->empty())
+		return -1;
+	for (std::string::iterator iter = info->begin(); iter < info->end(); iter++)
+	{
+		if (*iter >= '0' && *iter <= '9'){
+			if (i == 0){
+				sum += *iter -'0';
+			} else {
+				sum *= 10;
+				sum += *iter - '0';
+			}
+			i++;
+			continue;
+		}
+		else
+			return(-1);
+	}
+	return(sum);
 }
-   
+
+void	Phonebook::display_(std::string *info, int repeat){
+	std::cout << "PUT CONTACT INDEX SEARCHING FOR FROM 0 TO " << booksize - 1 << "OR TYPE 'Q' TO QUIT." <<std::endl;
+	std::getline(std::cin, *info);
+	if (std::cin.eof())
+		exit (EXIT_FAILURE);
+	if (*info == "q" || *info == "Q")
+		return ;
+	int x = check_input(info);
+	if (x == -1){
+		std::cout << "EMPTY." << std::endl;
+		return ;
+	}
+	else if (x != -1 && x < booksize){
+		if (x >= 0 && x < booksize){
+			std::cout << "FIRST_NAME     :" << contacts[x].get_(0) << std::endl;
+			std::cout << "LAST_NAME      :" << contacts[x].get_(1) << std::endl;
+			std::cout << "NICK_NAME      :" << contacts[x].get_(2) << std::endl;
+			std::cout << "PHONE_NUMBER   :" << contacts[x].get_(3) << std::endl;
+			std::cout << "DARKEST_SECRET :" << contacts[x].get_(4) << std::endl;
+		}
+	}
+	else {
+		if (repeat < 2){
+			repeat += 1;
+			std::cout << "THIS MESSAGE 4 now" << std::endl;
+			display_(info, repeat);
+		}
+		else {
+			std::cout << "YOU TRY WRONG INPUT 3 TIMES." << std::endl << "failed." << std::endl;
+		}
+	}
+}
+
+void	Phonebook::display_(std::string *info, int repeat, int empty){
+	std::cout << "PUT CONTACT INDEX SEARCHING FOR FROM 0 TO " << booksize - 1 << "OR TYPE 'Q' TO QUIT." <<std::endl;
+	std::getline(std::cin, *info);
+	if (std::cin.eof())
+		exit (EXIT_FAILURE);
+	if (*info == "q" || *info == "Q")
+		return ;
+	int x = check_input(info);
+	if (x == 0){
+		empty += 1;
+		std::cout << "EMPTY." << std::endl;
+		if (empty < 3){
+			display_(info, repeat, empty);
+		}
+		else
+			std::cout << "MAX TRY IS 3" << std::endl;
+		return ;
+	}
+	else if (x != -1 && x < booksize){
+		if (x >= 0 && x < booksize){
+			std::cout << "FIRST_NAME     :" << contacts[x].get_(0) << std::endl;
+			std::cout << "LAST_NAME      :" << contacts[x].get_(1) << std::endl;
+			std::cout << "NICK_NAME      :" << contacts[x].get_(2) << std::endl;
+			std::cout << "PHONE_NUMBER   :" << contacts[x].get_(3) << std::endl;
+			std::cout << "DARKEST_SECRET :" << contacts[x].get_(4) << std::endl;
+		}
+	}
+	else {
+		if (repeat < 2){
+			repeat += 1;
+			std::cout << "THIS MESSAGE 4 now" << std::endl;
+			display_(info, repeat);
+		}
+		else {
+			// std::cout << "" << std::endl;
+			std::cout << "YOU TRY WRONG INPUT 3 TIMES." << std::endl << "failed." << std::endl;
+		}
+	}
+}
+
+void	Phonebook::search_(void){
+	std::string info;
+	std::cout << "|==========|==========|==========|==========|" << std::endl;
+	std::cout << "|     index|FIRST_NAME| LAST_NAME|  NICKNAME|" << std::endl;
+	std::cout << "|__________|__________|__________|__________|" << std::endl;
+	if (booksize == 0)
+		std::cout << "PHONEBOOK IS EMPTY... ADD A CONTACT FIRST !" << std::endl;
+	else {
+		for (int i = 0; i < booksize; i++)
+		{
+			for (int ii = 0; ii < 3; ii++)
+			{
+				if (ii == 0){
+					std::cout << "|";
+					std::cout << std::setw(10);
+					std::cout << i;
+				}
+				std::cout << "|";
+				std::string contactinfo = contacts[i].get_(ii);
+				if (contactinfo.length() < 10){
+					std::cout << std::setw(10);
+					std::cout << contacts[i].get_(ii);
+				}
+				else if (contactinfo.length() > 9){
+					for (size_t i = 0; i < 9; i++){
+						std::cout << contactinfo[i];
+					}
+					std::cout << '.';
+				}
+				else
+					std::cout << contacts[i].get_(ii);
+			}
+			std::cout << "|" << std::endl;
+			std::cout << "|__________|__________|__________|__________|" << std::endl;
+		}
+		std::cout << "PUT CONTACT INDEX SEARCHING FOR FROM 0 TO " << booksize - 1 << std::endl;
+		std::getline(std::cin, info);
+		if (std::cin.eof())
+			exit (EXIT_FAILURE);
+		int repeat(0); repeat++;
+		int x = check_input(&info);
+		if (info.empty()){
+			std::cout << "EMPTY" << std::endl;
+			display_(&info, repeat, 1);
+			return;
+		}
+		if (x != -1 && x < booksize){
+			if (x >= 0 && x < booksize){
+				std::cout << "FIRST_NAME     :" << contacts[x].get_(0) << std::endl;
+				std::cout << "LAST_NAME      :" << contacts[x].get_(1) << std::endl;
+				std::cout << "NICK_NAME      :" << contacts[x].get_(2) << std::endl;
+				std::cout << "PHONE_NUMBER   :" << contacts[x].get_(3) << std::endl;
+				std::cout << "DARKEST_SECRET :" << contacts[x].get_(4) << std::endl;
+			}
+		}
+		else{
+			std::cout << "INVALID INPUT..." << std::endl;
+			display_(&info, repeat);
+		}
+
+	}
+}
+

@@ -9,9 +9,8 @@ int main(){
 	{
 		std::cout <<"PLEASE ENTER :   ADD , SEARCH  OR  EXIT !" << std::endl;
 		std::getline(std::cin, buff);
-		if (std::cin.eof()){
-			return EXIT_FAILURE;
-		}
+		if (std::cin.eof())
+			exit (EXIT_FAILURE);
 		if (buff == "ADD" || buff == "add")
 			phonebook.add_();
 		else if (buff == "SEARCH" || buff == "search")

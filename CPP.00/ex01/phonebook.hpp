@@ -6,17 +6,18 @@
 
 class	Phonebook{
 	private:
-			int index;
-			int booksize;
+			int 	index;
+			int 	booksize;
 			Contact contacts[8];
-			int	add_info(std::string *info2add, int sign);
-			// void del_prev(int index, int count);
+			int		add_info(std::string *info2add, int sign);
+			void	display_(std::string *info, int repeat);
+			void	display_(std::string *info, int repeat, int empty);
 	public:
 			Phonebook();
 			~Phonebook();
 			void		add_(void);
-			void		add_(int x);
-			int	search_(void);
-			int display_();
+			void		add_(int x, int repeat);
+			void		search_(void);
 };
+
 #endif
