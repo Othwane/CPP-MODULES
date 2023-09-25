@@ -38,7 +38,6 @@ void	print_messages(int msg){
 void	Phonebook::add_(int x, int repeat){
 	std::string info;
 
-
 	if (index < 8){
 		for (int i = x; i < 5; i++)
 		{
@@ -223,12 +222,11 @@ void	Phonebook::display_(std::string *info, int repeat, int empty){
 	else {
 		if (repeat < 2){
 			repeat += 1;
-			std::cout << "THIS MESSAGE 4 now" << std::endl;
+			std::cout << "INVALID INPUT..." << std::endl;
 			display_(info, repeat);
 		}
 		else {
-			// std::cout << "" << std::endl;
-			std::cout << "YOU TRY WRONG INPUT 3 TIMES." << std::endl << "failed." << std::endl;
+			std::cout << "WRONG INPUT 3 TIMES." << std::endl;
 		}
 	}
 }
@@ -275,7 +273,7 @@ void	Phonebook::search_(void){
 		int repeat(0); repeat++;
 		int x = check_input(&info);
 		if (info.empty()){
-			std::cout << "EMPTY" << std::endl;
+			std::cout << "NO EMPTY INPUT." << std::endl;
 			display_(&info, repeat, 1);
 			return;
 		}
