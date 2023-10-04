@@ -1,12 +1,12 @@
-NAME = phonebook
+NAME = HITHISISBRAIN
 
-CC = g++
+CC = c++
 
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRCS = phonebook.cpp contact.cpp main.cpp
+SRCS = main.cpp
 
-OBJS = ${SRCS:.c=.o}
+OBJS = $(SRCS:.c=.o)
 
 RM = rm -rf
 
@@ -17,9 +17,10 @@ all: $(NAME)
 
 clean:
 		$(RM) $(NAME)
+
 fclean:
 		$(RM) $(NAME)
 
-re: clean all
+re:	clean all
 
 .PHONY: all clean re

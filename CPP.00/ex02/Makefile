@@ -4,11 +4,13 @@ CC = g++
 
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRCS = tests.cpp Account.cpp 
+SRCS = tests.cpp Account.cpp
+
+OBJS = ${SRCS:.c=.o}
 
 RM = rm -rf
 
-$(NAME):
+$(NAME): $(OBJS)
 	$(CC) $(FLAGS) $(SRCS) -o $(NAME)
 
 all: $(NAME)
