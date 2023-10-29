@@ -1,12 +1,12 @@
-NAME = ZombieHorde
+NAME = UNCV
 
 CC = c++
 
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRCS = main.cpp Weapon.cpp HumaneA.cpp HumaneB.cpp
+SRCS = main.cpp Weapon.cpp HumanA.cpp HumanB.cpp
 
-OBJS = ${SRCS:.c=.o}
+OBJS = ${SRCS:.cpp=.o}
 
 RM = rm -rf
 
@@ -16,9 +16,9 @@ $(NAME): $(OBJS)
 all: $(NAME)
 
 clean:
-		$(RM) $(NAME)
+		$(RM) $(OBJS)
 
-fclean:
+fclean: clean
 		$(RM) $(NAME)
 
 re:	clean all
