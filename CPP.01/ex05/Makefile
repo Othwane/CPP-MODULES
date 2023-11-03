@@ -1,10 +1,10 @@
-NAME = ACCOUNT
+NAME = HARL
 
 CC = c++
 
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRCS = tests.cpp Account.cpp
+SRCS = main.cpp Harl.cpp
 
 OBJS = ${SRCS:%.cpp=%.o}
 
@@ -16,10 +16,12 @@ $(NAME): $(OBJS)
 all: $(NAME)
 
 clean:
-		$(RM) $(OBJS)
+	$(RM) $(OBJS)
+
 fclean: clean
-		$(RM) $(NAME)
+	$(RM) $(NAME)
 
 re: fclean all
 
 .PHONY: all clean re
+

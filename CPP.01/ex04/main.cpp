@@ -8,7 +8,7 @@ int main(int argc, char **argv){
 	Replace replace_(argv[1], argv[2], argv[3]);
 	while (1)
 	{
-		if (!getline(replace_.file_in, replace_.buff))
+		if (!getline(replace_.file_in, replace_.buff, '\0'))
 			break;
 		replace_.rep_(replace_.buff);
 		// replace_.buff.clear();

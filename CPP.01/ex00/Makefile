@@ -6,7 +6,7 @@ FLAGS = -Wall -Wextra -Werror -std=c++98
 
 SRCS = main.cpp Zombie.cpp newZombie.cpp randomChump.cpp
 
-OBJS = ${SRCS:.c=.o}
+OBJS = ${SRCS:%.cpp=%.o}
 
 RM = rm -rf
 
@@ -16,11 +16,11 @@ $(NAME): $(OBJS)
 all: $(NAME)
 
 clean:
+		$(RM) $(OBJS)
+
+fclean: clean
 		$(RM) $(NAME)
 
-fclean:
-		$(RM) $(NAME)
-
-re:	clean all
+re:	fclean all
 
 .PHONY: all clean re

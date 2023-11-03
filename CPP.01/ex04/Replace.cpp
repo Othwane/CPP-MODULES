@@ -12,7 +12,7 @@ void	Replace::rep_(std::string &buff_){
 		buff.erase(fp, lookin_for.length());
 		buff.insert(fp, replaced_by);
 	}
-	file_out << buff << std::endl;
+	file_out << buff;
 }
 
 Replace::~Replace(){
