@@ -16,4 +16,6 @@ void	Replace::rep_(std::string &buff_){
 }
 
 Replace::~Replace(){
+	this->file_in.close();
+	this->file_out.close();
 }
