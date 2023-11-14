@@ -1,4 +1,4 @@
-NAME = FIXED
+NAME = FIXEDII
 
 CC = c++
 
