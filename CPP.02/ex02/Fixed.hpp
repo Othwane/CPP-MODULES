@@ -16,16 +16,16 @@ public:
     float toFloat( void ) const;
     int toInt( void ) const;
     Fixed& operator = (const Fixed& fixed);
-    bool	operator<( Fixed const &other ) const;
-	bool	operator<=( Fixed const &other ) const;
-	bool	operator>( Fixed const &other ) const;
-	bool	operator>=( Fixed const &other ) const;
-	bool	operator==( Fixed const &other ) const;
-	bool	operator!=( Fixed const &other ) const;
-	Fixed	operator+( Fixed const &other ) const;
-	Fixed	operator-( Fixed const &other ) const;
-	Fixed	operator*( Fixed const &other ) const;
-	Fixed	operator/( Fixed const &other ) const;
+    bool	operator<( Fixed const &fixed ) const;
+	bool	operator<=( Fixed const &fixed ) const;
+	bool	operator>( Fixed const &fixed ) const;
+	bool	operator>=( Fixed const &fixed ) const;
+	bool	operator==( Fixed const &fixed ) const;
+	bool	operator!=( Fixed const &fixed ) const;
+	Fixed	operator+( Fixed const &fixed ) const;
+	Fixed	operator-( Fixed const &fixed ) const;
+	Fixed	operator*( Fixed const &fixed ) const;
+	Fixed	operator/( Fixed const &fixed ) const;
 	Fixed	&operator++( void ); // prefix ++
 	Fixed	operator++( int ); // postfix ++
 	Fixed	&operator--( void ); // prefix --
