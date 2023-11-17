@@ -18,7 +18,5 @@ public:
 	Point &operator=(const Point &);
 	~Point();
 };
-
-	// std::ostream	&operator<<(std::ostream &_x, Point const point);
 	bool bsp(Point const point_i, Point const point_ii, Point const point_iii, Point const point);
 #endif

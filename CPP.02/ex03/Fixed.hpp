@@ -15,21 +15,21 @@ public:
     Fixed(float const f);
     float toFloat( void ) const;
     int toInt( void ) const;
-    Fixed& operator = (const Fixed& fixed);
-    bool	operator<( Fixed const &other ) const;
-	bool	operator<=( Fixed const &other ) const;
-	bool	operator>( Fixed const &other ) const;
-	bool	operator>=( Fixed const &other ) const;
-	bool	operator==( Fixed const &other ) const;
-	bool	operator!=( Fixed const &other ) const;
-	Fixed	operator+( Fixed const &other ) const;
-	Fixed	operator-( Fixed const &other ) const;
-	Fixed	operator*( Fixed const &other ) const;
-	Fixed	operator/( Fixed const &other ) const;
-	Fixed	&operator++( void ); // prefix ++
-	Fixed	operator++( int ); // postfix ++
-	Fixed	&operator--( void ); // prefix --
-	Fixed	operator--( int ); // postfix --
+    Fixed	&operator = (const Fixed& fixed);
+	Fixed	operator+( Fixed const &fixed ) const;
+	Fixed	operator-( Fixed const &fixed ) const;
+	Fixed	operator*( Fixed const &fixed ) const;
+	Fixed	operator/( Fixed const &fixed ) const;
+	Fixed	&operator++( void );
+	Fixed	operator++( int );
+	Fixed	&operator--( void );
+	Fixed	operator--( int );
+    bool	operator<( Fixed const &fixed ) const;
+	bool	operator<=( Fixed const &fixed ) const;
+	bool	operator>( Fixed const &fixed ) const;
+	bool	operator>=( Fixed const &fixed ) const;
+	bool	operator==( Fixed const &fixed ) const;
+	bool	operator!=( Fixed const &fixed ) const;
 	static Fixed const	&min( Fixed const &a, Fixed const &b );
 	static Fixed const	&max( Fixed const &a, Fixed const &b );
 	static Fixed &min( Fixed &a, Fixed &b );
