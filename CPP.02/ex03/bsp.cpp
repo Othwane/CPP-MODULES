@@ -5,7 +5,7 @@ static Fixed area (const Point point_i, const Point point_ii, const Point point_
 	Fixed	p1 = point_iii.getX() * (point_i.getY() - point_ii.getY());
 	Fixed	p2 = point_i.getX() * (point_ii.getY() - point_iii.getY());
 	Fixed	p3 = point_ii.getX() * (point_iii.getY() - point_i.getY());
-	Fixed	a =  p1 + p2 + p3;
+	Fixed	a =  (p1 + p2 + p3) / 2;
 	if (a.toFloat() >= 0)
 		return (a);
 	else
