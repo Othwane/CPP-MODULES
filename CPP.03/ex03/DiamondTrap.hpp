@@ -1,31 +1,37 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   DiamondTrap.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: unky0 <unky0@student.42.fr>                +#+  +:+       +#+        */
+/*   By: omajdoub <omajdoub@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 12:33:10 by omajdoub          #+#    #+#             */
-/*   Updated: 2025/06/01 17:58:57 by unky0            ###   ########.fr       */
+/*   Updated: 2023/09/07 12:33:15 by omajdoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#include "ClapTrap.hpp"
-#include "ScavTrap.hpp"
-#include <iostream>
+#ifndef DIAMONDTRAP_HPP
+#define DIAMONDTRAP_HPP
 
-int main() {
-    // ClapTrap clap1("CL4P-TP");
-    // clap1.attack("Bandit");
-    // clap1.takeDamage(5);
-    // clap1.beRepaired(3);
+#include "FragTrap.hpp"
+#include "ScavTrap.hpp"
+
+class DiamondTrap : public FragTrap, public ScavTrap {
+private:
+    std::string _name;
+
+public:
+    DiamondTrap();
+    DiamondTrap(std::string name);
+    DiamondTrap(const DiamondTrap& other);
+    ~DiamondTrap();
     
-    ScavTrap scav1("SC4V-TP");
-    scav1.attack("Raider");
-    scav1.takeDamage(30);
-    scav1.beRepaired(10);
-    scav1.guardGate();
+    DiamondTrap& operator=(const DiamondTrap& other);
     
-    return 0;
-}
+    using ScavTrap::attack;
+    void whoAmI();
+};
+
+#endif

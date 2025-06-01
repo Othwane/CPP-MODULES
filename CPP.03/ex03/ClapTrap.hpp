@@ -1,31 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   ClapTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: unky0 <unky0@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 12:33:10 by omajdoub          #+#    #+#             */
-/*   Updated: 2025/06/01 17:58:57 by unky0            ###   ########.fr       */
+/*   Updated: 2025/06/01 17:36:12 by unky0            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#include "ClapTrap.hpp"
-#include "ScavTrap.hpp"
-#include <iostream>
+#ifndef CLAPTRAP_HPP
+#define CLAPTRAP_HPP
 
-int main() {
-    // ClapTrap clap1("CL4P-TP");
-    // clap1.attack("Bandit");
-    // clap1.takeDamage(5);
-    // clap1.beRepaired(3);
+#include <string>
+
+class ClapTrap {
+protected:
+    std::string _name;
+    unsigned int _hitPoints;
+    unsigned int _energyPoints;
+    unsigned int _attackDamage;
+
+public:
+    ClapTrap();
+    ClapTrap(std::string name);
+    ClapTrap(const ClapTrap& other);
+    ~ClapTrap();
     
-    ScavTrap scav1("SC4V-TP");
-    scav1.attack("Raider");
-    scav1.takeDamage(30);
-    scav1.beRepaired(10);
-    scav1.guardGate();
+    ClapTrap& operator=(const ClapTrap& other);
     
-    return 0;
-}
+    void attack(const std::string& target);
+    void takeDamage(unsigned int amount);
+    void beRepaired(unsigned int amount);
+};
+
+#endif
